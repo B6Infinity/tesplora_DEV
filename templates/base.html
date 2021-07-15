@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,76 +9,48 @@
     <link rel="stylesheet" href="static/style.css">
     <title>tesplora{% block title %}{% endblock title %}</title>
 </head>
+
 <body>
 
-<div id="main-header-parent">
-    <div id="main-header">
+    <div id="main-header-parent">
+        <div id="main-header">
 
-        <!-- 
+            <!-- 
         <img src="static/" alt="" id="header-logo-parent">
         tesplora -->
-        
-        <div id="main-inner-header">
 
-            <div id="main-logo-container">
-                <img src="static/Tesplora standalone_LOGO_TRANSPARENT.png" alt="" id="header-logo-img">
-                <h1><span style="color: #40B8EA;">esp</span><span style="color: #70C5A4">lora</span></h1>
+            <div id="main-inner-header">
+
+                <div id="main-logo-container">
+                    <img src="static/Tesplora standalone_LOGO_TRANSPARENT.png" alt="" id="header-logo-img">
+                    <h1><span style="color: #40B8EA;">esp</span><span style="color: #70C5A4">lora</span></h1>
+                </div>
+
+                <!-- NOT LOGGED IN -->
+                <!-- <div id="main-headericons-container">
+                <img class="main-headericon-image" src="https://img.icons8.com/small/64/ffffff/why-us-male.png"/>
+            </div> -->
+                
+            <!-- LOGGED IN -->
+                <div id="main-headericons-container">
+                    <img class="main-headericon-image" src="https://img.icons8.com/small/64/ffffff/gender-neutral-user.png" />
+                </div>
+                
+
             </div>
 
 
+
         </div>
-
-
-
     </div>
-</div>
 
 
-<style>
-    #main-header{
-        width: 100%;
-        height: 80px;
-        display: block;
-        background-color: #101010;
-    }
 
-    #main-inner-header{
-        height: 100%;
-        width: 1100px;
-        display: block;
-        margin: 0 auto;
-        /* background-color: rgba(255, 0, 0, 0.363); */
-    }
-    #main-logo-container{
-        height: 100%;
-        display: table;
-        float: left;
-    }
-    #main-logo-container h1{
-        height: 100%;
-        display: table-cell;
-        vertical-align: middle;
-        font-size: 36px;
-        padding: 0;
-    }
-    #header-logo-img{
-        object-fit: contain;
-        height: 50px;
-        padding: 15px 0px 15px 10px;
-        margin-top: auto;
-        /* height: 100%; */
-        display: table-cell;
-        vertical-align: middle;
-    }
+    <!-- VARIABLE BODY STARTS HERE -->
+    {% block body %}
+    {% endblock body %}
+    <!-- BODY ENDS HERE -->
 
-</style>
-
-
-<!-- VARIABLE BODY STARTS HERE -->
-{% block body %}
-{% endblock body %}
-<!-- BODY ENDS HERE -->
-    
 </body>
 
 <!-- POST DOC SCRIPT STARTS HERE -->
