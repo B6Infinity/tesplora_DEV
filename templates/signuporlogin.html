@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block title %} - Login/SignUp{% endblock title %}
+{% block body %}
+
+
+<div class="master-container rowflex">
+
+    <div class="master-element">
+        
+        <h2>LOGIN</h2>
+
+        <form action="" method="post" autocomplete="off">
+
+            <div style="height: 10vh;"></div>
+            
+            <div class="login_n_signup-form-container" style="width: 95%;">
+                <input class="input_100w" type="text" placeholder="Username" required>
+            </div>
+
+            <div style="height: 5vh;"></div>
+            
+            <div class="login_n_signup-form-container" style="width: 95%;">
+                <input class="input_100w" type="text" placeholder="Password" required>
+            </div>
+
+            <div style="height: 10vh;"></div>
+            
+            <div class="btn btn-square btn-blue" style="padding: 5px 20px;">LOGIN</div>
+
+        </form>
+
+    </div>
+
+    <div class="master-element">
+
+        <h2>SIGNUP</h2>
+
+        <div class="login_n_signup-form-container">
+            HI
+        </div>
+
+    </div>
+
+
+</div>
+
+<style>
+    .master-container .rowflex {
+        flex-direction: row;
+    }
+    .master-container .colflex {
+        flex-direction: column;
+    }
+    .master-container {
+        height: 82vh;
+
+        margin: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #C5E5D6;
+        display: flex;
+    }
+    .master-element {
+        transition: 0.2s;
+        width: 100%;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 5px;
+        
+    }
+    .master-element:hover {
+        background-color: #ABDAC6;
+        border-bottom: 2px solid #70C5A4;
+        border-right: 2px solid #70C5A4;
+        
+    }
+    .login_n_signup-form-container{
+        padding: 10px;
+    }
+    .input_100w:focus{
+        border-bottom: 3px solid #40B8EA;
+    }
+    .input_100w:hover{
+        background-color: rgb(238, 238, 238);
+    }
+    .input_100w{
+        transition: 0.2s;
+        padding: 5px;
+        border: none;
+        outline: none;
+        width: 98%;
+    }
+    
+    
+    .btn{
+        transition: 0.2s;
+        border-radius: 5px;
+        margin: 3px;
+        padding: 5px;
+        display: inline-block;
+        user-select: none;
+    }
+    .btn-blue:hover{
+        background-color: #19abe9;
+    }
+    .btn-blue{
+        background-color: #40B8EA;
+    }
+    .btn-green:hover{
+        background-color: #20b67c;
+    }
+    .btn-green{
+        background-color: #70C5A4;
+    }
+    .btn-square{
+        border-radius: 0px;
+    }
+
+</style>
+
+{% endblock body %}
