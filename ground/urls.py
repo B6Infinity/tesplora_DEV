@@ -7,6 +7,8 @@ urlpatterns = [
     path('', view=views.home, name='home'),
     path('home', view=views.home, name='home'),
     path('loginorsignup', view=views.loginorsignup, name='loginorsignup'),
+    path('login', view=views.loginorsignup, name='loginorsignup'),
+    path('signup', view=views.loginorsignup, name='loginorsignup'),
 
     # APIs
 

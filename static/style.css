@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
-
-
-*{
+* {
     padding: 0px;
     margin: 0px;
     list-style: none;
@@ -9,7 +7,7 @@
     font-family: 'Nunito', sans-serif;
 }
 
-body{
+body {
     width: 100%;
 }
 
@@ -49,10 +47,10 @@ body{
     padding: 0;
 }
 
-#main-headericons-container .main-headericon-image:hover{
+#main-headericons-container .main-headericon-image:hover {
     box-shadow: 1px 1px 1px white;
-
 }
+
 #main-headericons-container .main-headericon-image {
     /* background-color: royalblue; */
     transition: 0.2s;
@@ -73,19 +71,81 @@ body{
     /* height: 100%; */
     display: table-cell;
     vertical-align: middle;
-
 }
 
+.btn {
+    transition: 0.2s;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 5px;
+    display: inline-block;
+    user-select: none;
+    font-weight: 550;
+}
 
+.btn-blue:hover {
+    background-color: #19abe9;
+}
 
+.btn-blue {
+    background-color: #40B8EA;
+}
 
+.btn-green:hover {
+    background-color: #20b67c;
+}
 
+.btn-green {
+    background-color: #70C5A4;
+}
 
+.btn-square {
+    border-radius: 0px;
+}
 
-@media only screen and (min-width: 600px) {
+.master-container .rowflex {
+    flex-direction: row;
+}
 
+.master-container .colflex {
+    flex-direction: column;
+}
 
+.master-container {
+    height: 82vh;
+    box-shadow: 1px 1px 3px black;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #C5E5D6;
+    display: flex;
+}
 
+.master-element {
+    transition: 0.2s;
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
 
-    
+.master-element:hover {
+    background-color: #ABDAC6;
+    border-bottom: 2px solid #70C5A4;
+    border-right: 2px solid #70C5A4;
+}
+
+.login_n_signup-form-container {
+    padding: 10px;
+}
+
+@media only screen and (max-width: 600px) and (min-width: 400px) {
+
+    .master-container .rowflex {
+        flex-direction: column;
+    }
+
+    body{
+        background: #101010;
+    }
 }

@@ -4,18 +4,89 @@
 
 <!-- PANEL -->
 <div id="landing-panel">
+    <div class="header">
+        <form>
+            <h1 style="color: #fff; margin-bottom: 70px; font-size: 45px; letter-spacing: 2px; text-align: center; text-shadow: 1px 1px 1px black;"> Let the journey begin</h1>
+            <div class="form-box" style="font-size: 20px;">
 
+                <input type="text" class="search-field business" placeholder=" Destination... ">
+
+                <input type="text" class="search-field business" placeholder="Budget">
+
+                <!-- <div class="search-btn"> -->
+                <div class="btn btn-blue" type="button">
+                    Let's Go
+                </div>
+                <!-- </div>           -->
+
+            </div>
+
+
+        </form>
+    </div>
+    <!-- 
     <input type="text" placeholder="DESTINATION...">
     <input type="text" placeholder="BUDGET">
-    <input type="button" value="Lets Go!">
+    <input type="button" value="Lets Go!"> -->
 
 </div>
 
+
 <style>
-    #landing-panel{
+    #landing-panel {
         width: 100%;
         height: 500px;
-        background-color: thistle;
+        /* background-color: thistle; */
+        /* height: 100vh; */
+        background-image: url(https://source.unsplash.com/1920x1080/?tourism,night);
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+
+
+    .search-field {
+        height: 20px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ddedf7;
+        outline: none;
+
+    }
+
+    .business {
+        width: 400px;
+
+    }
+
+    .location {
+        width: 200px;
+    }
+
+    .search-btn {
+        height: 55px;
+        width: 150px;
+        background-color: #40B8EA;
+        border: none;
+        color: #000;
+        border-radius: 10px;
+
+    }
+
+    .search-btn:hover {
+        background: #0ce0bd;
+        cursor: pointer;
+    }
+
+    .form-box {
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.5);
+
     }
 </style>
 
