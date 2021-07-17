@@ -139,13 +139,18 @@ body {
     padding: 10px;
 }
 
-@media only screen and (max-width: 600px) and (min-width: 400px) {
+.input_100w:focus {
+    border-bottom: 3px solid #40B8EA;
+}
 
-    .master-container .rowflex {
-        flex-direction: column;
-    }
+.input_100w:hover {
+    background-color: rgb(238, 238, 238);
+}
 
-    body{
-        background: #101010;
-    }
+.input_100w {
+    transition: 0.2s;
+    padding: 5px;
+    border: none;
+    outline: none;
+    width: 98%;
 }
