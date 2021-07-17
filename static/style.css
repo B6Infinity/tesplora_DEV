@@ -9,6 +9,7 @@
 
 body {
     width: 100%;
+    background: rgb(31, 31, 31);
 }
 
 #main-header {
@@ -153,4 +154,8 @@ body {
     border: none;
     outline: none;
     width: 98%;
+}
+
+.whitetxt{
+    color: white;
 }
