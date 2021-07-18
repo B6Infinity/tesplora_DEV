@@ -15,6 +15,8 @@ def loginorsignup(request):
 
     return render(request, 'signuporlogin.html')
 
+def view_profile(request):
+    pass
 
 # APIs
 

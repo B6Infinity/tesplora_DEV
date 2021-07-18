@@ -9,9 +9,10 @@ urlpatterns = [
     path('loginorsignup', view=views.loginorsignup, name='loginorsignup'),
     path('login', view=views.loginorsignup, name='loginorsignup'),
     path('signup', view=views.loginorsignup, name='loginorsignup'),
+    path('profile-<str:username>', view=views.view_profile, name='view_profile'),
 
     # APIs
 
-    path('checkifusernameexists', view=views.checkifusernameexists, name='checkifusernameexists'),
+    path('check_if_username_exists', view=views.checkifusernameexists, name='checkifusernameexists'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
