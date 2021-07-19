@@ -1,62 +1,49 @@
 {% extends 'base.html' %}
-{% block title %} - Login/SignUp{% endblock title %}
+{% block title %} - Create New Gig{% endblock title %}
 {% block body %}
 
+<script src="https://cdn.tiny.cloud/1/17dlhsaszy2sf1ryjk5b83g2ubvls1xb69jo4tbne6neikp3/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
 
-<div class="master-container rowflex">
 
-    <div class="master-element white-txt">
+<div class="white-txt">
 
-        <h2>LOGIN</h2>
 
-        <form action="" method="post" autocomplete="off">
+    {% if user.profile.is_seller %}
+    <!-- USER IS SELLER (GIG EDITOR)-->
 
-            <div style="height: 10vh;"></div>
+    
+    <div class="master-container">
+        
+        
+        
+        <div style="padding: 20px; width: 70%;">
+            <div class="big-text">Create a Gig</div>
 
-            <div class="login_n_signup-form-container" style="width: 95%;">
-                <input class="input_100w" type="text" placeholder="Username" required>
+
+            <div class="login_n_signup-form-container">
+                <h3>Title:</h3>
+                <input type="text" class="input_100w" placeholder="">
             </div>
 
-            <div style="height: 5vh;"></div>
+            <div class="login_n_signup-form-container">
+                <h3>Describe your Plan:</h3>
+                <textarea id="gig_rtfeditor">
+                    <p style="text-align: center;"><span style="font-size: 24pt;"><strong>THE FOLLOWING WILL BE COVERED IN THIS TRIP</strong></span></p>
+                    <ul>
+                    <li style="text-align: left;"><em><strong><span style="font-size: 14pt;">DAY 1</span></strong></em></li>
+                    </ul>
+                    <p style="padding-left: 80px;">...</p>
+                    
 
-            <div class="login_n_signup-form-container" style="width: 95%;">
-                <input class="input_100w" type="text" placeholder="Password" required>
+                </textarea>
+
             </div>
 
-            <div style="height: 10vh;"></div>
-
-            <div class="btn btn-square btn-blue" style="padding: 5px 20px;">LOGIN</div>
-
-        </form>
-
-    </div>
-
-    <div class="master-element white-txt">
-
-        <h2>SIGNUP</h2>
-
-        <div style="height: 5vh;"></div>
-        <form action="" method="post" autocomplete="off">
-            {% csrf_token %}
-
-            <div class="login_n_signup-form-container" style="width: 95%;">
-                <input class="input_100w" id="signup_username" type="text" placeholder="Username" required>
-            </div>
-
-            <div class="login_n_signup-form-container" style="width: 95%;">
-                <input class="input_100w" type="text" placeholder="Display Name" required>
-            </div>
-
-            <div class="login_n_signup-form-container" style="width: 95%;">
-                <input class="input_100w" type="text" placeholder="E-Mail" required>
-            </div>
-
-            <div class="login_n_signup-form-container" style="width: 95%;">
-                <input class="input_100w" type="tel" placeholder="Phone Number (Without Country Code)" maxlength="10" required>
-            </div>
-            
-            <div class="login_n_signup-form-container" style="width: 100%;">
-                <select class="input_100w" id="country" name="country" style="width: 95%; background-color: ffffff48; color: grey;">
+            <div class="login_n_signup-form-container">
+                <h3>Destination:</h3>
+                <select class="input_100w" id="country" name="country"
+                    style="width: 100%; background-color: ffffff48; color: grey;">
                     <option disabled selected>Select country</option>
                     <option value="AF">Afghanistan</option>
                     <option value="AX">Aland Islands</option>
@@ -313,68 +300,64 @@
                 </select>
             </div>
 
-            <div class="login_n_signup-form-container" style="width: 95%;">
-                <input class="input_100w" type="text" placeholder="New Password" required>
+            <div class="login_n_signup-form-container">
+                <h3>Price per head (INR):</h3>
+                <input type="number" class="input_100w" placeholder="₹">
             </div>
-            <div class="login_n_signup-form-container" style="width: 95%;">
-                <input class="input_100w" type="text" placeholder="Confirm Password" required>
-            </div>
-            
-            <div class="login_n_signup-form-container" style="width: 95%;">
-                <input type="checkbox" name="" id=""> I have agreed to the Terms and Conditions.
-            </div>
-            
 
-            <div class="btn btn-square btn-blue" style="padding: 5px 20px;">SIGN UP</div>
 
-        </form>
+            <div class="btn btn-green" style="color: black; margin: 10px; font-size: 20px;">Create</div>
 
+            <div style="height: 8vh;"></div>
+        </div>
+    </div>
+
+
+    <script>
+        // Initialise Tiny MCE RTE
+        tinymce.init({
+            selector: 'textarea#gig_rtfeditor',
+            skin: 'oxide-dark',
+            content_css: 'dark',
+            plugins: 'emoticons',
+            plugins: 'lists code emoticons textcolor',
+            toolbar: 'undo redo | styleselect | fontsizeselect | bold italic underline | forecolor backcolor |' +
+                ' numlist bullist | ' +
+                'alignleft aligncenter alignright alignjustify | outdent indent | emoticons',
+            height: 300,
+
+
+        });
+
+
+
+    </script>
+
+
+
+
+    {% else %}
+    <!-- USER IS NOT SELLER -->
+
+
+    <h1 class="mega-big-text">Are You a seller?</h1>
+    <div style="color: gainsboro; font-size: 30px;">
+        {% if user.is_authenticated %}
+        <a href="">Click here to change your account to a seller account!</a>
+        {% else %}
+        <a href="/login">Login</a> or <a href="/login">Sign Up</a> for a Seller Account!
+        {% endif %}
 
     </div>
 
 
+
+    {% endif %}
+
+
+
+
+
+
 </div>
-
-<style>
-    
-
-
-    
-</style>
-
-
-<script>
-
-    let csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
-
-    let timer = null;
-
-    $('#signup_username').keydown(function () {
-        clearTimeout(timer);
-        timer = setTimeout(stoppedTypingUSERNAME, 1000);
-    });
-    function stoppedTypingUSERNAME() {
-
-        let form = new FormData();
-        let typedUserName = document.getElementById("signup_username").value;
-
-        form.append('username',typedUserName);
-
-        fetch(`check_if_username_exists`,
-                    {
-                        method: 'POST',
-                        body: form,
-                        headers: {
-                            'Accept': 'multipart/form-data, application/json, text/plain, */*',
-                            "X-CSRFToken": csrftoken
-                        },
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);})
-
-    }
-
-</script>
-
 {% endblock body %}

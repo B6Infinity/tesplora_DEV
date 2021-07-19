@@ -18,6 +18,12 @@ def loginorsignup(request):
 def view_profile(request):
     pass
 
+def creategig(request):
+    # print(request.user.profile.is_seller)
+
+    return render(request, 'creategig.html')
+
+
 # APIs
 
 def checkifusernameexists(request):

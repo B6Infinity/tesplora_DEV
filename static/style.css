@@ -7,6 +7,32 @@
     font-family: 'Nunito', sans-serif;
 }
 
+/* SCROLLBAR */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+
+a {
+    color: inherit;
+}
+
 body {
     width: 100%;
     background: rgb(31, 31, 31);
@@ -118,8 +144,9 @@ body {
     margin: 10px;
     padding: 10px;
     border-radius: 5px;
-    background-color: #C5E5D6;
+    background-color: #c5e5d615;
     display: flex;
+    overflow-y: auto;
 }
 
 .master-element {
@@ -134,6 +161,7 @@ body {
     background-color: #ABDAC6;
     border-bottom: 2px solid #70C5A4;
     border-right: 2px solid #70C5A4;
+    color: black;
 }
 
 .login_n_signup-form-container {
@@ -146,6 +174,7 @@ body {
 
 .input_100w:hover {
     background-color: rgb(238, 238, 238);
+    border-radius: 5px;
 }
 
 .input_100w {
@@ -154,8 +183,27 @@ body {
     border: none;
     outline: none;
     width: 98%;
+    background: #ffffff48;
+    border-radius: 3px;
 }
 
-.whitetxt{
+.white-txt {
     color: white;
+}
+
+.black-txt {
+    color: black;
+}
+
+.mega-big-text {
+    font-size: 60px;
+}
+
+.big-text {
+    font-size: 40px;
+}
+
+#gig_rtfeditor {
+    border-radius: 5px;
+    background-color: orange;
 }

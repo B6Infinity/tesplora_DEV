@@ -10,6 +10,7 @@ urlpatterns = [
     path('login', view=views.loginorsignup, name='loginorsignup'),
     path('signup', view=views.loginorsignup, name='loginorsignup'),
     path('profile-<str:username>', view=views.view_profile, name='view_profile'),
+    path('creategig', view=views.creategig, name='creategig'),
 
     # APIs
 
