@@ -27,10 +27,10 @@ def checkifusernameexists(request):
         try:
 
             username = request.POST['username']
-
-            RESPONSE["username"] = username
+            print(username)
+            RESPONSE["username"] = str(username)
             
-            if len(User.objects.filter(username=request.user.username)) == 0: 
+            if len(User.objects.filter(username=str(username))) == 0: 
                 RESPONSE["exists"] = False
             else:
                 RESPONSE["exists"] = True

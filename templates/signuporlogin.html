@@ -37,10 +37,10 @@
 
         <div style="height: 5vh;"></div>
         <form action="" method="post" autocomplete="off">
-
+            {% csrf_token %}
 
             <div class="login_n_signup-form-container" style="width: 95%;">
-                <input class="input_100w" type="text" placeholder="Username" required>
+                <input class="input_100w" id="signup_username" type="text" placeholder="Username" required>
             </div>
 
             <div class="login_n_signup-form-container" style="width: 95%;">
@@ -341,5 +341,40 @@
 
     
 </style>
+
+
+<script>
+
+    let csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+    let timer = null;
+
+    $('#signup_username').keydown(function () {
+        clearTimeout(timer);
+        timer = setTimeout(stoppedTypingUSERNAME, 1000);
+    });
+    function stoppedTypingUSERNAME() {
+
+        let form = new FormData();
+        let typedUserName = document.getElementById("signup_username").value;
+
+        form.append('username',typedUserName);
+
+        fetch(`check_if_username_exists`,
+                    {
+                        method: 'POST',
+                        body: form,
+                        headers: {
+                            'Accept': 'multipart/form-data, application/json, text/plain, */*',
+                            "X-CSRFToken": csrftoken
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);})
+
+    }
+
+</script>
 
 {% endblock body %}
