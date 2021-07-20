@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %} - View Gig{% endblock title %}
+{% block body %}
+
+
+
+<div class="white-txt">
+
+
+    {% if ERROR is not None %}
+    <br><br>
+    <div class="mega-big-text textwt-700">
+        {{ERROR}}
+    </div>
+
+    {% else %}
+    <!-- GIG FOUND -->
+
+    <div class="master-container colflex" style="background-color: #18362a15; margin: 3px; height: 84vh;">
+
+        <div class="gig-header">
+            <div class="gig-title">
+                {{REQUESTED_GIG.title}}
+            </div>
+            <div class="gig-author-container" onclick="window.location.href = '/profile-{{REQUESTED_GIG.author}}';">
+                -{{REQUESTED_GIG.author.first_name}}
+            </div>
+
+        </div>
+        <!-- <hr> -->
+
+        <!-- BODY -->
+
+
+        <div class="gig-location" id="map">
+            <!-- {{REQUESTED_GIG.destination}} -->
+            <iframe height="200" style="border:0; width: 100%; filter: grayscale(100%) invert(92%) contrast(83%);" loading="lazy" allowfullscreen
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCvW_prr2UywPZXK5NGuShRRfX6YsNKsfw&q=France&zoom=5">
+            </iframe>
+
+
+        </div>
+
+        <div class="gig-body">
+            <div class="gig-description">
+                {{REQUESTED_GIG.description|safe}}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<style>
+    .gig-header {
+        /* flex-grow: 1; */
+        /* background-color: rgb(71, 65, 4); */
+        padding: 10px;
+    }
+
+    .gig-title {
+        font-size: 30px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .gig-author-container {
+        float: right;
+        user-select: none;
+        font-weight: 300;
+    }
+
+    .gig-body {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .gig-location {
+        height: max-content;
+        background-color: #0000007c;
+        border-radius: 3px;
+        padding: 2px;
+    }
+
+    #map{
+        height: 200px;
+    }
+</style>
+
+{% endif %}
+</div>
+{% endblock body %}

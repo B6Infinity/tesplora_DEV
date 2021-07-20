@@ -134,11 +134,11 @@ body {
     border-radius: 0px;
 }
 
-.master-container .rowflex {
+.rowflex {
     flex-direction: row;
 }
 
-.master-container .colflex {
+.colflex {
     flex-direction: column;
 }
 
@@ -201,6 +201,18 @@ body {
 
 .mega-big-text {
     font-size: 60px;
+}
+
+.textwt-500{
+    font-weight: 500;
+}
+
+.textwt-700{
+    font-weight: 700;
+}
+
+.textwt-900{
+    font-weight: 900;
 }
 
 .big-text {

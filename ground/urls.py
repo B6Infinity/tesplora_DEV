@@ -11,6 +11,7 @@ urlpatterns = [
     path('signup', view=views.loginorsignup, name='loginorsignup'),
     path('profile-<str:username>', view=views.view_profile, name='view_profile'),
     path('creategig', view=views.creategig, name='creategig'),
+    path('viewgig-<str:gig_id>', view=views.viewgig, name='viewgig'),
 
     # APIs
 

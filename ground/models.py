@@ -282,6 +282,8 @@ class Profile(models.Model):
 
 
 class Gig(models.Model):
+    title = models.CharField(max_length=150, default="")
+
     destination = models.CharField(max_length=25, choices=countries)
 
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
