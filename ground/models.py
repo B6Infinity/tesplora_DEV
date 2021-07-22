@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.deletion import SET_DEFAULT, SET_NULL
 
 
 countries = (
@@ -270,7 +271,7 @@ class Image(models.Model):
             super(Image, self).save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.comments)
+        return str(self.comments) + f" (ID: {self.id})"
     
 
 # Create your models here.
@@ -279,9 +280,9 @@ class Profile(models.Model):
 
     # profilePic = models.TextField(
     #     default="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
-    #  )
+    #  )  default=Image.objects.get(id=7)
 
-    # profilePic = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True)
+    profilePic = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True, blank=True, related_name="users")
 
     phone_no = models.CharField(max_length=10)
 
