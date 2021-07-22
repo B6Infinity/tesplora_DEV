@@ -17,14 +17,15 @@
     {% else %}
     <!-- GIG FOUND -->
 
-    <div class="master-container colflex" style="background-color: #18362a15; margin: 3px; height: 84vh;">
+    <div class="master-container colflex" style="background-color: #18362a15;margin: 3px; height: 84vh;z-index: 3;">
+        
 
         <div class="gig-header">
             <div class="gig-title">
                 {{REQUESTED_GIG.title}}
             </div>
             <div class="gig-author-container" onclick="window.location.href = '/profile-{{REQUESTED_GIG.author}}';">
-                -{{REQUESTED_GIG.author.first_name}}
+                -{{REQUESTED_GIG.author.first_name}}<br>Published on: {{REQUESTED_GIG.date_created}}
             </div>
 
         </div>
@@ -43,51 +44,62 @@
         </div>
         
         <div class="gig-body">
+
             <div class="gig-description">
                 {{REQUESTED_GIG.description|safe}}
-
+                <br><br>
+                <div style="padding: 1px; background-color: #0000007c"></div>
+                <div id="gig-expiry-date"><span style="color: grey; font-size: 18px;">({{REQUESTED_GIG.duration}} day(s) left!)</span> EXPIRES ON: <span style="color: crimson; background-color: black; border-radius: 5px; padding: 5px;">{{REQUESTED_GIG.date_of_expiry}}</span>
+                    </div>
             </div>
+            <br><br>
+            <div class="gig-detail">
+                Price Per Head: <span class="code_box" style="color: #40B8EA;">₹{{REQUESTED_GIG.price}}/-</span>
+            </div><br>
+            <div class="gig-detail">
+                Date Of Departure: <span class="code_box" style="color: #40B8EA;">{{REQUESTED_GIG.departure_date}}</span>
+            </div>
+            <div class="gig-detail">
+                Date Of Return: <span class="code_box" style="color: #40B8EA;">{{REQUESTED_GIG.return_date}}</span>
+            </div>
+            <br>
+
+            <div class="btn btn-green btn-square" style="font-size: 20px;">I'm in!</div>
+            <div class="btn btn-blue btn-square" style="font-size: 20px;">Contact</div>
+        </div>
+
+        <div id="seller-details">
+            <span class="medium-text textwt-700">SELLER DETAILS</span>
+            <hr>
+            
+            Name: {{REQUESTED_GIG.author.first_name}}<br>
+            Email: {{REQUESTED_GIG.author.email}}<br>
+            Phone No.: {{REQUESTED_GIG.author.profile.phone_no}}<br>
+
+            
+
         </div>
 
     </div>
 
 </div>
 
-
-
 <style>
-    .gig-header {
-        /* flex-grow: 1; */
-        /* background-color: rgb(71, 65, 4); */
-        padding: 10px;
-    }
-
-    .gig-title {
-        font-size: 30px;
+    .gig-detail{
+        font-size: 20px;
         font-weight: 600;
-        display: inline-block;
+        padding: 3px;
+    }
+    
+    .code_box{
+        transition: 0.2s;
+        background-color: black; border-radius: 5px; padding: 5px;
     }
 
-    .gig-author-container {
-        float: right;
-        user-select: none;
-        font-weight: 300;
-    }
-
-    .gig-body {
-        padding: 20px;
-        margin: 10px;
-    }
-
-    .gig-location {
-        height: max-content;
-        background-color: #0000007c;
+    #seller-details{
+        background: #101010;
         border-radius: 3px;
-        padding: 2px;
-    }
-
-    #map{
-        height: 200px;
+        padding: 5px;
     }
 </style>
 
