@@ -7,7 +7,8 @@
 
 
 <div class="white-txt">
-
+    
+    {% csrf_token %}
 
     {% if user.profile.is_seller %}
     <!-- USER IS SELLER (GIG EDITOR)-->
@@ -23,7 +24,7 @@
 
             <div class="login_n_signup-form-container">
                 <h3>Title:</h3>
-                <input type="text" class="input_100w" placeholder="">
+                <input type="text" id="title" class="input_100w" placeholder="">
             </div>
 
             <div class="login_n_signup-form-container">
@@ -37,13 +38,15 @@
                     <p style="padding-left: 80px;"><span style="font-size: 10pt;">YOUR <span style="color: #000000; background-color: #ffffff;">TEXT</span> HERE🙃</span></p>
 
                 </textarea>
-
+                <div class="non-premium-note">
+                    {% if not user.profile.is_premium_user %}Pictures can be added on Premium Account{% endif %}
+                </div>
             </div>
 
             <div class="login_n_signup-form-container">
                 <h3>Destination:</h3>
-                <select class="input_100w" id="country" name="country"
-                    style="width: 100%; background-color: ffffff48; color: grey;">
+                <select class="input_100w" id="destination" name="country"
+                    style="width: 100%; background-color: ffffff48;">
                     <option disabled selected>Select country</option>
                     <option value="AF">Afghanistan</option>
                     <option value="AX">Aland Islands</option>
@@ -302,12 +305,19 @@
 
             <div class="login_n_signup-form-container">
                 <h3>Price per head (INR):</h3>
-                <input type="number" class="input_100w" placeholder="₹">
+                <input type="number" id="price_per_head" class="input_100w" placeholder="₹">
+            </div>
+            <div class="login_n_signup-form-container">
+                <h3>Max People Count:</h3>
+                <input id="max_people_count" type="number" class="input_100w" value="1">
             </div>
 
             <div class="login_n_signup-form-container">
-                <h3>Date Of Expiry</h3>
+                <h3>Date Of Expiry of Gig</h3>
                 <input type="date" class="input_100w">
+                <div class="non-premium-note">
+                    {% if not user.profile.is_premium_user %}15 days maximum for Free Account{% endif %}
+                </div>
             </div>
             <div class="login_n_signup-form-container">
                 <h3>Date Of Departure</h3>
@@ -319,7 +329,7 @@
             </div>
 
 
-            <div class="btn btn-green" style="color: black; margin: 10px; font-size: 20px;">Create</div>
+            <div onclick="submitGig()" class="btn btn-green" style="color: black; margin: 10px; font-size: 20px;">Create</div>
 
             <div style="height: 8vh;"></div>
         </div>
@@ -340,7 +350,36 @@
 
 
         });
+        
+        let csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+        
+        function submitGig(){
+            let gigForm = new FormData();
 
+            ERRORS = [];
+
+            // SCRAPING & FRISKING THE DATA
+            let title = $('#title')[0].value; if(title.trim().length == 0){ERRORS.push("Title can't be empty")}
+            let description = $('#gig_rtfeditor')[0].value; if(description.trim().length == 0){ERRORS.push("Description can't be empty")}
+            let destination = $('#destination')[0].value; if(destination == 'Select country'){ERRORS.push("Choose a Destination!")}
+            let price_per_head = $('#price_per_head')[0].value;
+            let max_people_count = $('#max_people_count')[0].value; if(max_people_count == 0){ERRORS.push("You need to at least take 1 person!")}
+
+            console.log(ERRORS.length);
+            
+            for (let error in ERRORS){
+                createAlertMessage('error', ERRORS[error]);
+            }
+            if (ERRORS.length !== 0) return null; // Terminate the Function if any error is present
+
+            // APPENDING THE DATA
+            gigForm.append('title', title);
+            gigForm.append('description', description);
+            gigForm.append('destination', destination);
+            gigForm.append('price_per_head', price_per_head);
+            gigForm.append('max_people_count', max_people_count);
+
+        }
 
 
     </script>
@@ -357,7 +396,7 @@
         {% if user.is_authenticated %}
         <a href="">Click here to change your account to a seller account!</a>
         {% else %}
-        <a href="/login">Login</a> or <a href="/login">Sign Up</a> for a Seller Account!
+        <a href="/login" class="green-txt">Login</a> or <a href="/login" class="blue-txt">Sign Up</a> for a Seller Account!
         {% endif %}
 
     </div>

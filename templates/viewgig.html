@@ -65,18 +65,27 @@
             <br>
 
             <div class="btn btn-green btn-square" style="font-size: 20px;">I'm in!</div>
-            <div class="btn btn-blue btn-square" style="font-size: 20px;">Contact</div>
+            <div class="btn btn-blue btn-square" style="font-size: 20px;" onclick="document.getElementById('seller-details').style.display = 'block'">Contact</div>
         </div>
 
-        <div id="seller-details">
+        <div id="seller-details" style="display: none;">
             <span class="medium-text textwt-700">SELLER DETAILS</span>
             <hr>
-            
-            Name: {{REQUESTED_GIG.author.first_name}}<br>
-            Email: {{REQUESTED_GIG.author.email}}<br>
-            Phone No.: {{REQUESTED_GIG.author.profile.phone_no}}<br>
-            
-            <img src="{{REQUESTED_GIG.author.profile.profilePic.url}}" alt="">
+
+            <div id="seller-details-body">
+                <div id="seller-details-txt">
+                    
+                    Name: <span class="" style="padding: 3px; color: #40B8EA;">{{REQUESTED_GIG.author.first_name}}</span><br>
+
+                    Email: <a href="mailto:{{REQUESTED_GIG.author.email}}" target="_blank"><span class="" style="padding: 3px; color: #40B8EA;">{{REQUESTED_GIG.author.email}}</span></a><br>
+
+                    Phone No.: <span class="" style="padding: 3px; color: #40B8EA;">{{REQUESTED_GIG.author.profile.phone_no}}</span><br>
+                    
+                </div>
+                
+                <img id="seller-profilepic" src="{{REQUESTED_GIG.author.profile.profilePic.url}}" alt="">
+
+            </div>
 
 
         </div>
@@ -86,22 +95,6 @@
 </div>
 
 <style>
-    .gig-detail{
-        font-size: 20px;
-        font-weight: 600;
-        padding: 3px;
-    }
-    
-    .code_box{
-        transition: 0.2s;
-        background-color: black; border-radius: 5px; padding: 5px;
-    }
-
-    #seller-details{
-        background: #101010;
-        border-radius: 3px;
-        padding: 5px;
-    }
 </style>
 
 {% endif %}

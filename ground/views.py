@@ -77,3 +77,12 @@ def handlelogin(request):
 def handlelogout(request):
     pass
 
+def createGig(request):
+    if request.method == 'POST':
+        RESPONSE = {}
+    
+    else:
+        return JsonResponse({"ERROR": "Bad Request"})
+        
+    
+    return JsonResponse(RESPONSE)

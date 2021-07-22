@@ -199,6 +199,14 @@ body {
     color: black;
 }
 
+.green-txt {
+    color: #70C5A4;
+}
+
+.blue-txt {
+    color: #40B8EA;
+}
+
 .mega-big-text {
     font-size: 60px;
 }
@@ -400,5 +408,50 @@ body {
     float: right;
     font-size: 22px;
     font-weight: 600;
+}
+
+.non-premium-note:hover{
+    color: red;
+}
+.non-premium-note{
+    transition: 0.2s;
+    color: gray;
+    font-size: 12px;
+    user-select: none;
+}
+
+
+.gig-detail{
+    font-size: 20px;
+    font-weight: 600;
+    padding: 3px;
+}
+
+.code_box{
+    transition: 0.2s;
+    background-color: black; border-radius: 5px; padding: 5px;
+}
+
+#seller-details{
+    background: #101010;
+    border-radius: 3px;
+    padding: 5px;
+}
+#seller-profilepic{
+    object-fit: contain;
+    float: right;
+    width: 100px;
+    top: 0px;
+    margin: 10px;
+    border-radius: 50%;
+    box-shadow: 2px 3px 3px whitesmoke;
+}
+#seller-details-body{
+    display: flex;
+}
+#seller-details-txt{
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 20px;
 }
 

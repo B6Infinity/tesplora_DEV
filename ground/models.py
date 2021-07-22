@@ -300,6 +300,13 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user.username)
 
+    
+    def save(self, *args, **kwargs):
+
+            self.profilePic = Image.objects.get(id=7)
+            
+            super(Profile, self).save(*args, **kwargs)
+
 
 class Gig(models.Model):
     title = models.CharField(max_length=150, default="")
@@ -318,6 +325,8 @@ class Gig(models.Model):
 
     departure_date = models.DateField()
     return_date = models.DateField()
+
+    max_people_count = models.IntegerField()
 
     def save(self, *args, **kwargs):
         self.duration = (self.date_of_expiry - self.date_created).days
