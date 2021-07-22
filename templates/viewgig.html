@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load b6_filters %}
 {% block title %} - View Gig{% endblock title %}
 {% block body %}
 
@@ -33,17 +34,18 @@
 
 
         <div class="gig-location" id="map">
-            <!-- {{REQUESTED_GIG.destination}} -->
+            
             <iframe height="200" style="border:0; width: 100%; filter: grayscale(100%) invert(92%) contrast(83%);" loading="lazy" allowfullscreen
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCvW_prr2UywPZXK5NGuShRRfX6YsNKsfw&q=France&zoom=5">
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCvW_prr2UywPZXK5NGuShRRfX6YsNKsfw&q={{REQUESTED_GIG.destination|destination_}}&zoom=5">
             </iframe>
 
 
         </div>
-
+        
         <div class="gig-body">
             <div class="gig-description">
                 {{REQUESTED_GIG.description|safe}}
+
             </div>
         </div>
 
