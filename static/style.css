@@ -218,6 +218,9 @@ body {
 .big-text {
     font-size: 40px;
 }
+.medium-text {
+    font-size: 30px;
+}
 
 #gig_rtfeditor {
     border-radius: 5px;
@@ -356,3 +359,46 @@ body {
 }
 
 /* ALERT BOX END */
+
+.gig-header {
+    /* flex-grow: 1; */
+    /* background-color: rgb(71, 65, 4); */
+    padding: 10px;
+}
+
+.gig-title {
+    font-size: 30px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.gig-author-container {
+    float: right;
+    user-select: none;
+    font-weight: 300;
+    text-align: right;
+}
+
+.gig-body {
+    padding: 20px;
+    margin: 10px;
+}
+
+.gig-location {
+    height: max-content;
+    background-color: #0000007c;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+#map{
+    height: 200px;
+}
+
+#gig-expiry-date{
+    user-select: none;
+    float: right;
+    font-size: 22px;
+    font-weight: 600;
+}
+

@@ -267,7 +267,6 @@ def sendstuff(STR):
 
 def destination_(CODE):
     
-    print(COUNTRY_NAMES[CODE])
     return COUNTRY_NAMES[CODE].replace(' ', '_')
 
 # Registering the filters: -

@@ -34,6 +34,11 @@ def viewgig(request, gig_id):
     else:
         RESPONSE["REQUESTED_GIG"] = Gig.objects.get(id=gig_id)
 
+        print((Gig.objects.get(id=gig_id).date_of_expiry - Gig.objects.get(id=gig_id).date_created).days)
+
+
+    RESPONSE["IMAGEE"] = Image.objects.first()
+
     return render(request, 'viewgig.html', RESPONSE)
 
 # APIs

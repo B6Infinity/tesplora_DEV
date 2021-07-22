@@ -259,18 +259,35 @@ countries = (
 )
 
 
+class Image(models.Model):
+    image = models.ImageField(upload_to='uploads/', blank=True)
+    url = models.TextField(default="", blank=False)
+    comments = models.TextField(default="IMAGE_", blank=True)
+
+    def save(self, *args, **kwargs):
+            self.url = 'media/'+str(self.image)
+            
+            super(Image, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return str(self.comments)
+    
+
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
-    profilePic = models.TextField(
-        default="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
-    )
+    # profilePic = models.TextField(
+    #     default="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+    #  )
+
+    # profilePic = models.ForeignKey(Image, on_delete=models.SET_NULL, null=True)
 
     phone_no = models.CharField(max_length=10)
 
     
     is_seller = models.BooleanField(default=False)
+    is_premium_user = models.BooleanField(default=False)
 
     country = models.CharField(max_length=25, choices=countries, default="none")
 
@@ -293,12 +310,19 @@ class Gig(models.Model):
     price = models.BigIntegerField() #In INR
 
     date_created = models.DateField(blank=False, null=False, auto_now_add=True)
+    date_of_expiry = models.DateField()
+    duration = models.IntegerField(default=0) # Days
+
+    departure_date = models.DateField()
+    return_date = models.DateField()
+
+    def save(self, *args, **kwargs):
+        self.duration = (self.date_of_expiry - self.date_created).days
+
+
+        super(Gig, self).save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.author.username)
+        return str(self.title + ' - ' +self.author.username)
 
 
-class Image(models.Model):
-    url = models.ImageField(upload_to='uploads/')
-    
-    comments = models.TextField(default="", blank=True)

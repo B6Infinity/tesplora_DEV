@@ -305,6 +305,19 @@
                 <input type="number" class="input_100w" placeholder="₹">
             </div>
 
+            <div class="login_n_signup-form-container">
+                <h3>Date Of Expiry</h3>
+                <input type="date" class="input_100w">
+            </div>
+            <div class="login_n_signup-form-container">
+                <h3>Date Of Departure</h3>
+                <input type="date" class="input_100w">
+            </div>
+            <div class="login_n_signup-form-container">
+                <h3>Date Of Return</h3>
+                <input type="date" class="input_100w">
+            </div>
+
 
             <div class="btn btn-green" style="color: black; margin: 10px; font-size: 20px;">Create</div>
 
@@ -319,11 +332,10 @@
             selector: 'textarea#gig_rtfeditor',
             skin: 'oxide-dark',
             content_css: 'dark',
-            plugins: 'emoticons',
-            plugins: 'lists code emoticons textcolor',
-            toolbar: 'undo redo | styleselect | fontsizeselect | bold italic underline | forecolor backcolor |' +
+            plugins: 'lists code emoticons textcolor {% if user.profile.is_premium_user %}image{% endif %}', 
+            toolbar: 'undo redo | styleselect | fontsizeselect | bold italic underline forecolor backcolor |' +
                 ' numlist bullist | ' +
-                'alignleft aligncenter alignright alignjustify | outdent indent | emoticons',
+                'alignleft aligncenter alignright alignjustify | outdent indent | emoticons {% if user.profile.is_premium_user %}image{% endif %}',
             height: 300,
 
 
