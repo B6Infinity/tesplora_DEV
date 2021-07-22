@@ -266,7 +266,9 @@ class Image(models.Model):
     comments = models.TextField(default="IMAGE_", blank=True)
 
     def save(self, *args, **kwargs):
-            self.url = 'media/'+str(self.image)
+
+            if len(self.url.strip()) == 0:
+                self.url = 'media/'+str(self.image)
             
             super(Image, self).save(*args, **kwargs)
 
