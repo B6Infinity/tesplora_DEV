@@ -16,5 +16,6 @@ urlpatterns = [
     # APIs
 
     path('check_if_username_exists', view=views.checkifusernameexists, name='checkifusernameexists'),
+    path('submit_gig', view=views.createGigObject, name='submit_gig'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
