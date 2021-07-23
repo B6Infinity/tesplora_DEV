@@ -314,18 +314,18 @@
 
             <div class="login_n_signup-form-container">
                 <h3>Date Of Expiry of Gig</h3>
-                <input type="date" class="input_100w">
+                <input type="date" id="date_of_expiry" class="input_100w">
                 <div class="non-premium-note">
                     {% if not user.profile.is_premium_user %}15 days maximum for Free Account{% endif %}
                 </div>
             </div>
             <div class="login_n_signup-form-container">
                 <h3>Date Of Departure</h3>
-                <input type="date" class="input_100w">
+                <input id="date_of_departure" type="date" class="input_100w">
             </div>
             <div class="login_n_signup-form-container">
                 <h3>Date Of Return</h3>
-                <input type="date" class="input_100w">
+                <input id="date_of_return" type="date" class="input_100w">
             </div>
 
 
@@ -353,8 +353,12 @@
         
         let csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
         
+        let is_premium_user = "{{user.profile.is_premium_user}}"=="True"?true:false;
+
         function submitGig(){
             let gigForm = new FormData();
+
+            
 
             ERRORS = [];
 
@@ -364,8 +368,18 @@
             let destination = $('#destination')[0].value; if(destination == 'Select country'){ERRORS.push("Choose a Destination!")}
             let price_per_head = $('#price_per_head')[0].value;
             let max_people_count = $('#max_people_count')[0].value; if(max_people_count == 0){ERRORS.push("You need to at least take 1 person!")}
+            
+            let date_of_expiry_str = $('#date_of_expiry')[0].value; 
+            let date_of_expiry = new Date(Date.parse(date_of_expiry_str));
+            let gigDuration = date_of_expiry - new Date();
+            gigDuration = Math.ceil(gigDuration / (1000 * 60 * 60 * 24));
+            if (gigDuration > 15 && !is_premium_user){ERRORS.push("You need a Premium Account to keep the Gig more than 15 days!");}
+            
+            let date_of_departure = $('#date_of_departure')[0].value;
+            let date_of_return= $('#date_of_return')[0].value;
 
-            console.log(ERRORS.length);
+
+            console.log("ERRORS: "+ERRORS.length);
             
             for (let error in ERRORS){
                 createAlertMessage('error', ERRORS[error]);
@@ -378,6 +392,13 @@
             gigForm.append('destination', destination);
             gigForm.append('price_per_head', price_per_head);
             gigForm.append('max_people_count', max_people_count);
+            gigForm.append('date_of_expiry_str', date_of_expiry_str);
+            gigForm.append('gigDuration', gigDuration);
+            gigForm.append('date_of_departure', date_of_departure);
+            gigForm.append('date_of_return', date_of_return); 
+
+
+            
 
         }
 
