@@ -11,11 +11,13 @@ urlpatterns = [
     path('signup', view=views.loginorsignup, name='loginorsignup'),
     path('profile-<str:username>', view=views.view_profile, name='view_profile'),
     path('creategig', view=views.creategig, name='creategig'),
+    path('editgig-<str:gig_id>', view=views.editgig, name='editgig'),
     path('viewgig-<str:gig_id>', view=views.viewgig, name='viewgig'),
 
     # APIs
 
     path('check_if_username_exists', view=views.checkifusernameexists, name='checkifusernameexists'),
     path('submit_gig', view=views.createGigObject, name='submit_gig'),
+    path('edit_gig', view=views.editGigObject, name='edit_gig'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

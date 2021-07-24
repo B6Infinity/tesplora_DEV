@@ -269,7 +269,17 @@ def destination_(CODE):
     
     return COUNTRY_NAMES[CODE].replace(' ', '_')
 
+def leadingzero(digit):
+    digit = int(digit)
+    strdigit = str(digit)
+    if len(str(digit)) == 1:
+        strdigit = '0'+str(digit)
+
+    return strdigit
+    
+
 # Registering the filters: -
 
 register.filter('sendstuff', sendstuff)
 register.filter('destination_', destination_)
+register.filter('leadingzero', leadingzero)

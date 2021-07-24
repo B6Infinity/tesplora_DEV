@@ -24,9 +24,14 @@
             <div class="gig-title">
                 {{REQUESTED_GIG.title}} 
 
-                <div id="edit_gig_button">
+                {% if REQUESTED_GIG.author == user %}
+
+                <div id="edit_gig_button" onclick="window.location.href='/editgig-{{REQUESTED_GIG.id}}'">
                     Edit <span class="fas fa-edit" style="font-size: 17px;"></span>
                 </div>
+                
+                {% endif %}
+
 
             </div>
             <div class="gig-author-container" onclick="window.location.href = '/profile-{{REQUESTED_GIG.author}}';">

@@ -35,12 +35,31 @@ def viewgig(request, gig_id):
     else:
         RESPONSE["REQUESTED_GIG"] = Gig.objects.get(id=gig_id)
 
-        print((Gig.objects.get(id=gig_id).date_of_expiry - Gig.objects.get(id=gig_id).date_created).days)
-
-
-    RESPONSE["IMAGEE"] = Image.objects.first()
 
     return render(request, 'viewgig.html', RESPONSE)
+
+def editgig(request, gig_id):
+    
+    RESPONSE = {}
+    
+    # Check if Gig exists
+    _requested_gig = Gig.objects.filter(id=gig_id)
+    if len(_requested_gig) == 0:
+        RESPONSE["ERROR"] = "Gig Not Found!"
+        return render(request, 'editgig.html', RESPONSE)
+
+    requested_gig = _requested_gig[0]
+    
+    # Check if Request.user is the author
+    if request.user != requested_gig.author:
+        RESPONSE["ERROR"] = "That's not your Gig, is it?"
+        return render(request, 'editgig.html', RESPONSE)
+
+    RESPONSE["REQUESTED_GIG"] = requested_gig
+
+    return render(request, 'editgig.html', RESPONSE)
+    
+
 
 # APIs
 
@@ -144,6 +163,88 @@ def createGigObject(request):
 
         RESPONSE["STATUS"] = "Success"
         RESPONSE["GIG_ID"] = new_Gig.id
+
+    else:
+        return JsonResponse({"ERROR": "Bad Request"})
+        
+    
+    return JsonResponse(RESPONSE)
+
+def editGigObject(request):
+    RESPONSE ={"STATUS": "Failed"}
+
+    if request.method == 'POST':
+        if not request.user.profile.is_seller:
+            return JsonResponse({"ERROR": "Erm, you need to be a seller, Mr. Hacker :)"})
+
+        # USER IS SELLER
+
+        old_Gig_id = request.POST['original_gig_id']
+
+        # Check if Gig Exists
+        if len(Gig.objects.filter(id=old_Gig_id)) == 0:
+            return JsonResponse({"ERROR": "Gig Not Found!"})
+        
+        old_Gig = Gig.objects.get(id=old_Gig_id)
+
+
+        title = request.POST['title']
+        description = request.POST['description']
+        price_per_head = request.POST['price_per_head']
+        max_people_count = request.POST['max_people_count']
+        date_of_expiry_str = request.POST['date_of_expiry_str']
+        date_of_departure_str = request.POST['date_of_departure']
+        destination = request.POST['destination']
+        date_of_return_str = request.POST['date_of_return']
+
+        # SERVER SIDE DATA FRISK
+
+        ERRORS = []
+        RESPONSE["ERRORS"] = ERRORS
+        if len(title) > 150:
+            ERRORS.append("Title can't be more than 150 words")
+
+        date_of_expiry = datetime.strptime(date_of_expiry_str, "%Y-%m-%d")
+        if (date_of_expiry - datetime.now()).days > 15 and not request.user.profile.is_premium_user:
+            ERRORS.append("You need a Premium Account to keep the Gig more than 15 days!")
+
+        date_of_departure = datetime.strptime(date_of_departure_str, "%Y-%m-%d")
+        date_of_return = datetime.strptime(date_of_return_str, "%Y-%m-%d")
+
+        if (date_of_departure - datetime.now()).days < 0 or (date_of_return - datetime.now()).days < 0:
+            ERRORS.append("We don't have a Time Machine Buddy! Check the Dates of Departure and Return")
+
+        if (date_of_return - date_of_departure).days < 0:
+            ERRORS.append("Invalid Return Date")
+
+
+        # Return and Terminate if Errors found in Parameter Clutter
+        if len(ERRORS) != 0:
+            RESPONSE["ERRORS"] = ERRORS
+            RESPONSE["ERROR"] = "Submit Request Failed: Inconvinient Data Parameters"
+            return JsonResponse(RESPONSE)
+
+
+        # Edit Gig Object
+
+
+        
+        old_Gig.title = title
+        old_Gig.destination = destination
+        old_Gig.description = description
+        old_Gig.price = price_per_head
+        old_Gig.date_of_expiry = date_of_expiry
+        old_Gig.departure_date = date_of_departure
+        old_Gig.return_date = date_of_return
+        old_Gig.max_people_count = max_people_count
+
+        
+        
+
+        old_Gig.save() # GIG Object Created!
+
+        RESPONSE["STATUS"] = "Success"
+        RESPONSE["GIG_ID"] = old_Gig_id
 
     else:
         return JsonResponse({"ERROR": "Bad Request"})
