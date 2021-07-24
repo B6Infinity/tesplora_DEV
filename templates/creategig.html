@@ -356,6 +356,8 @@
 
         let is_premium_user = "{{user.profile.is_premium_user}}" == "True" ? true : false;
 
+        
+
         function submitGig() {
             let gigForm = new FormData();
 
@@ -365,7 +367,10 @@
 
             // SCRAPING & FRISKING THE DATA
             let title = $('#title')[0].value; if (title.trim().length == 0) { ERRORS.push("Title can't be empty") }
+            
+            tinyMCE.triggerSave();
             let description = $('#gig_rtfeditor')[0].value; if (description.trim().length == 0) { ERRORS.push("Description can't be empty") }
+
             let destination = $('#destination')[0].value; if (destination == 'Select country') { ERRORS.push("Choose a Destination!") }
             let price_per_head = $('#price_per_head')[0].value; if (String(price_per_head).trim().length == 0) { ERRORS.push("Yo... Is it a free Service? Enter a valid Price!") }
             let max_people_count = $('#max_people_count')[0].value; if (max_people_count == 0) { ERRORS.push("You need to at least take 1 person!") }
@@ -381,6 +386,11 @@
 
 
             console.log("ERRORS: " + ERRORS.length);
+
+
+
+            console.log(description);
+
 
             for (let error in ERRORS) {
                 createAlertMessage('error', ERRORS[error]);
@@ -410,8 +420,19 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data["ERRORS"]);
+                    console.log(data);
+
+                    for (let i=0; i<data["ERRORS"].length; i++){
+                        createAlertMessage('error', data["ERRORS"][i]);
+                    }
                     
+                    if (data["STATUS"] == "Failed"){
+                        createAlertMessage('error', "Failed to create Gig, try again!");
+                    }
+                    else{
+                        let id = data["GIG_ID"];
+                        window.location.href = "/viewgig-"+id;
+                    }
                 })
 
 

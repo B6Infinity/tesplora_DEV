@@ -22,7 +22,12 @@
 
         <div class="gig-header">
             <div class="gig-title">
-                {{REQUESTED_GIG.title}}
+                {{REQUESTED_GIG.title}} 
+
+                <div id="edit_gig_button">
+                    Edit <span class="fas fa-edit" style="font-size: 17px;"></span>
+                </div>
+
             </div>
             <div class="gig-author-container" onclick="window.location.href = '/profile-{{REQUESTED_GIG.author}}';">
                 -{{REQUESTED_GIG.author.first_name}}<br>Published on: {{REQUESTED_GIG.date_created}}
@@ -55,7 +60,11 @@
             <br><br>
             <div class="gig-detail">
                 Price Per Head: <span class="code_box" style="color: #40B8EA;">₹{{REQUESTED_GIG.price}}/-</span>
-            </div><br>
+            </div>
+            <div class="gig-detail">
+                Total Package Seats: <span class="code_box" style="color: #40B8EA;">{{REQUESTED_GIG.max_people_count}}</span>
+            </div>
+            <br>
             <div class="gig-detail">
                 Date Of Departure: <span class="code_box" style="color: #40B8EA;">{{REQUESTED_GIG.departure_date}}</span>
             </div>

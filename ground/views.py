@@ -79,7 +79,7 @@ def handlelogout(request):
     pass
 
 def createGigObject(request):
-    RESPONSE ={}
+    RESPONSE ={"STATUS": "Failed"}
 
     if request.method == 'POST':
         if not request.user.profile.is_seller:
@@ -118,16 +118,32 @@ def createGigObject(request):
             ERRORS.append("Invalid Return Date")
 
 
-        print(ERRORS)
-
         # Return and Terminate if Errors found in Parameter Clutter
         if len(ERRORS) != 0:
             RESPONSE["ERRORS"] = ERRORS
             RESPONSE["ERROR"] = "Submit Request Failed: Inconvinient Data Parameters"
             return JsonResponse(RESPONSE)
 
-        
-        # print("HI")
+
+        # Create Gig Object
+
+        new_Gig = Gig.objects.create(
+            title = title,
+            destination = destination,
+            author = request.user,
+            description = description,
+            price = price_per_head,
+            date_of_expiry = date_of_expiry,
+            departure_date = date_of_departure,
+            return_date = date_of_return,
+            max_people_count = max_people_count,
+            date_created = datetime.now()
+        )
+
+        # new_Gig.save() # GIG Object Created!
+
+        RESPONSE["STATUS"] = "Success"
+        RESPONSE["GIG_ID"] = new_Gig.id
 
     else:
         return JsonResponse({"ERROR": "Bad Request"})

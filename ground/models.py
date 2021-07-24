@@ -320,9 +320,9 @@ class Gig(models.Model):
     price = models.BigIntegerField() #In INR
 
     date_created = models.DateField(blank=False, null=False, auto_now_add=True)
+
     date_of_expiry = models.DateField()
     duration = models.IntegerField(default=0) # Days
-
     departure_date = models.DateField()
     return_date = models.DateField()
 

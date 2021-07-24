@@ -455,3 +455,19 @@ body {
     font-size: 20px;
 }
 
+#edit_gig_button:hover{
+    background-color: #19abe9;
+    border-radius: 5px;
+    color: white;
+}
+#edit_gig_button{
+    user-select: none;
+    transition: 0.2s;
+    display: inline-block;
+    font-size: 17px;
+    margin: 0px 5px;
+    padding: 3px;
+    background-color: #B8DEF5;
+    border-radius: 3px;
+    color: black;
+}
